@@ -32,21 +32,20 @@ Person = Struct.new(*response["person"].keys.collect(&:to_sym)) do
 
     def social_profiles?
         if defined? social_profiles
-          puts social_profiles
+          social_profiles
+          else puts "A person doesn't have any social profiles"
         end
     end
 
     def hobbies
-      puts additional_info['hobby']
+      additional_info['hobby']
     end
 end
 
 
 person = Person.new(*response["person"].values)
 puts "Hello #{person.name}!"
-
 p person.adult?
-
 puts "Gender: #{person.gender}"
-person.social_profiles?
-person.hobbies
+puts "Social profiles: #{person.social_profiles?}"
+puts "Hobbies: #{person.hobbies}"
