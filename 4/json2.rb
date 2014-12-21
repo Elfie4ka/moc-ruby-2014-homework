@@ -1,51 +1,52 @@
 require 'rubygems'
 require 'json'
 
-RESPONSE='{"person":{"personal_data":{"name": "Nataly", "gender":"female", "age":18},
-"social_profiles":["https://www.facebook.com/janataliia"],
+RESPONSE='{"person":{"personal_data":{"name": "Nataly", "gender":"female", "age":22},
+"social_profiles":["https://www.facebook.com/janataliia", ""],
 "additional_info":{"hobby":["skiing", "travelling"]}}}'
 
 response = JSON.parse(RESPONSE, :quirks_mode => true)
 
 
 Person = Struct.new(*response["person"].keys.collect(&:to_sym)) do
+
     def name
-        if (defined? personal_data)&&(personal_data['name'])
-            nam=personal_data['name']
-        end
+    #  ((response["person"].key? personal_data)&&(personal_data['name'])) ? personal_data['name'] : 'Unnamed user'
+      if (defined? personal_data)&&(personal_data['name'])
+        personal_data['name']
+      end
     end
 
     def adult?
-        personal_data["age"] >= 21
+    #  if personal_data["age"].slice[/[^\d\.]/]
+      personal_data["age"] >= 21 ? 'adult' : 'child'
+     # end
     end
 
     def gender
         if (defined? personal_data)&&(personal_data['gender'])
-            puts (personal_data["gender"])
-        else puts "The user didn't say"
+            personal_data["gender"]
+        else "not defined"
         end
     end
 
-    def facebook_addr
+    def social_profiles?
         if defined? social_profiles
-            social_profiles.each do |social_profile|
-            end
+          puts social_profiles
         end
     end
 
-    def hobbies?
-        has_hobby = false
-        if defined?(additional_info) && additional_info['hobby']
-            has_hobby = true
-        end
-        has_hobby
+    def hobbies
+      puts additional_info['hobby']
     end
 end
 
 
 person = Person.new(*response["person"].values)
 puts "Hello #{person.name}!"
+
 p person.adult?
-person.gender
-person.facebook_addr
-p person.hobbies?
+
+puts "Gender: #{person.gender}"
+person.social_profiles?
+person.hobbies
