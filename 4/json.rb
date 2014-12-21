@@ -12,7 +12,6 @@ Person = Struct.new(*response["person"].keys.collect(&:to_sym)) do
   def greeting
     if (defined? personal_data)&&(personal_data['name'])
       name=personal_data['name']
-      puts "Hello #{name}!"
     end
   end
 

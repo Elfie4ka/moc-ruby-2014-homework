@@ -7,11 +7,11 @@ RESPONSE='{"person":{"personal_data":{"name": "Nataly", "gender":"female", "age"
 
 response = JSON.parse(RESPONSE, :quirks_mode => true)
 
+
 Person = Struct.new(*response["person"].keys.collect(&:to_sym)) do
-    def greeting
+    def name
         if (defined? personal_data)&&(personal_data['name'])
-            name=personal_data['name']
-            puts "Hello #{name}!"
+            nam=personal_data['name']
         end
     end
 
@@ -42,8 +42,9 @@ Person = Struct.new(*response["person"].keys.collect(&:to_sym)) do
     end
 end
 
+
 person = Person.new(*response["person"].values)
-person.greeting
+puts "Hello #{person.name}!"
 p person.adult?
 person.gender
 person.facebook_addr
