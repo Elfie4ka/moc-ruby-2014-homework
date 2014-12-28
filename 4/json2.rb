@@ -11,16 +11,20 @@ response = JSON.parse(RESPONSE, :quirks_mode => true)
 Person = Struct.new(*response["person"].keys.collect(&:to_sym)) do
 
     def name
-    #  ((response["person"].key? personal_data)&&(personal_data['name'])) ? personal_data['name'] : 'Unnamed user'
+#      ((self.has_key?("personal_data"))&&(personal_data['name'])) ? personal_data['name'] : 'Unnamed user'
+    #  if pers.key?("personal_data")
       if (defined? personal_data)&&(personal_data['name'])
         personal_data['name']
       end
+    #    end
     end
 
     def adult?
     #  if personal_data["age"].slice[/[^\d\.]/]
       personal_data["age"] >= 21 ? 'adult' : 'child'
+     # else 'age '
      # end
+
     end
 
     def gender
@@ -38,7 +42,9 @@ Person = Struct.new(*response["person"].keys.collect(&:to_sym)) do
     end
 
     def hobbies
+      if has_key?("hobby")
       additional_info['hobby']
+        end
     end
 end
 
