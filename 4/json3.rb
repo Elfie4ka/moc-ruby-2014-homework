@@ -45,14 +45,18 @@ Person = Struct.new(*response["person"].keys.collect(&:to_sym)) do
         self.has_social_network("vk.com")
     end
 
-    #def hobbies
+    def hobbies
         #additional_info['hobby']
-    #end
+    end
 end
 person = Person.new(*response["person"].values)
+
+response["person"].each {|key,value| puts key}
+
+
 puts "Hello #{person.name}!"
 puts person.adult?
 puts "Gender: #{person.gender}"
 puts "Has facebook? : #{person.has_facebook?}"
 puts "Has vk? : #{person.has_vk?}"
-#puts "Hobbies: #{person.hobbies}"
+puts "Hobbies: #{person.hobbies}"
