@@ -82,18 +82,18 @@ class PetsFactory
     end
   end
 
-  
+
 end
 
 class Playground
 
   attr_accessor :pets
 
-  def initialize(pet)
+  def initialize(input_pets)
 
     self.pets = []
-    pet.each do |pet|
-      pets.push PetsFactory.create_pet(pet[:name], pet[:species]) { p "I`m glad to play, my name is #{self.name}" }
+    input_pets.each do |pet|
+      pets.push PetsFactory.create_pet(pet["name"], pet["species"]) { p "I`m glad to play, my name is #{pet["name"]}" }
       if pet.has_key?(:name) && pet.has_key?(:species)
     end
   end
@@ -106,9 +106,9 @@ end
 
 person = Person.new(*response["person"].values)
 
-  pets=person.pets
+  p_pets=person.pets
 
-  playground = Playground.new(pets)
+  playground = Playground.new(p_pets)
 
   p_actions = []
   p_actions.push -> { p "Meow meow!" }
@@ -117,7 +117,7 @@ person = Person.new(*response["person"].values)
 
 playground.call_over(p_actions)
 
-
+=begin
 puts "Hello #{person.name}!"
 puts person.adult?
 puts "Gender: #{person.gender}"
@@ -125,3 +125,4 @@ puts "Has facebook? : #{person.has_facebook?}"
 puts "Has vk? : #{person.has_vk?}"
 puts "Hobbies: #{person.hobbies}"
 puts "I have pets: #{person.pets}"
+=end
