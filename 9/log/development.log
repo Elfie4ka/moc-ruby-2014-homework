@@ -3764,3 +3764,145 @@ Processing by ArticlesController#index as HTML
   [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 5], ["taggable_type", "Article"]]
   Rendered articles/index.html.erb within layouts/application (2.3ms)
 Completed 200 OK in 57ms (Views: 54.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-01-28 18:22:15 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 1], ["taggable_type", "Article"]]
+  [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 2], ["taggable_type", "Article"]]
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 3], ["taggable_type", "Article"]]
+  [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 4], ["taggable_type", "Article"]]
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 5], ["taggable_type", "Article"]]
+  [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 6], ["taggable_type", "Article"]]
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 7], ["taggable_type", "Article"]]
+  Rendered articles/index.html.erb within layouts/application (217.5ms)
+Completed 200 OK in 963ms (Views: 816.4ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/articles-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-01-28 18:22:17 +0200
+
+
+Started GET "/assets/welcome-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-01-28 18:22:17 +0200
+
+
+Started GET "/assets/application-5266d2988799ecc8fe6e81eaab412e7d.css?body=1" for 127.0.0.1 at 2015-01-28 18:22:17 +0200
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-01-28 18:22:17 +0200
+
+
+Started GET "/assets/welcome-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-01-28 18:22:17 +0200
+
+
+Started GET "/assets/application-fd30b062dffa1f37a416cebd713ed694.js?body=1" for 127.0.0.1 at 2015-01-28 18:22:17 +0200
+
+
+Started GET "/assets/turbolinks-686d2bf7d9d383528c901c64187a8c31.js?body=1" for 127.0.0.1 at 2015-01-28 18:22:17 +0200
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-01-28 18:22:17 +0200
+
+
+Started GET "/assets/articles-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-01-28 18:22:17 +0200
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-01-29 01:33:11 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 1], ["taggable_type", "Article"]]
+  [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 2], ["taggable_type", "Article"]]
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 3], ["taggable_type", "Article"]]
+  [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 4], ["taggable_type", "Article"]]
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 5], ["taggable_type", "Article"]]
+  [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 6], ["taggable_type", "Article"]]
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 7], ["taggable_type", "Article"]]
+  Rendered articles/index.html.erb within layouts/application (218.1ms)
+Completed 200 OK in 722ms (Views: 433.5ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/articles-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-01-29 01:33:13 +0200
+
+
+Started GET "/assets/welcome-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-01-29 01:33:13 +0200
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-01-29 01:33:13 +0200
+
+
+Started GET "/assets/application-5266d2988799ecc8fe6e81eaab412e7d.css?body=1" for 127.0.0.1 at 2015-01-29 01:33:13 +0200
+
+
+Started GET "/assets/turbolinks-686d2bf7d9d383528c901c64187a8c31.js?body=1" for 127.0.0.1 at 2015-01-29 01:33:13 +0200
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-01-29 01:33:13 +0200
+
+
+Started GET "/assets/welcome-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-01-29 01:33:13 +0200
+
+
+Started GET "/assets/articles-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-01-29 01:33:13 +0200
+
+
+Started GET "/assets/application-fd30b062dffa1f37a416cebd713ed694.js?body=1" for 127.0.0.1 at 2015-01-29 01:33:13 +0200
+
+
+Started GET "/tags/test" for 127.0.0.1 at 2015-01-29 01:33:27 +0200
+Processing by ArticlesController#index as HTML
+  Parameters: {"tag"=>"test"}
+  [1m[35mActsAsTaggableOn::Tag Load (0.2ms)[0m  SELECT "tags".* FROM "tags" WHERE (LOWER(name) = LOWER('test'))
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles" JOIN taggings articles_taggings_a94a8fe  ON articles_taggings_a94a8fe.taggable_id = articles.id AND articles_taggings_a94a8fe.taggable_type = 'Article' AND articles_taggings_a94a8fe.tag_id = 2[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 1], ["taggable_type", "Article"]]
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 3], ["taggable_type", "Article"]]
+  Rendered articles/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 163ms (Views: 42.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-01-29 10:15:44 +0200
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (65.2ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 1], ["taggable_type", "Article"]]
+  [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 2], ["taggable_type", "Article"]]
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 3], ["taggable_type", "Article"]]
+  [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 4], ["taggable_type", "Article"]]
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 5], ["taggable_type", "Article"]]
+  [1m[35mActsAsTaggableOn::Tag Load (0.0ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)  [["taggable_id", 6], ["taggable_type", "Article"]]
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 7], ["taggable_type", "Article"]]
+  Rendered articles/index.html.erb within layouts/application (74.4ms)
+Completed 200 OK in 2681ms (Views: 2547.5ms | ActiveRecord: 65.7ms)
+
+
+Started GET "/assets/articles-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-01-29 10:15:48 +0200
+
+
+Started GET "/assets/welcome-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-01-29 10:15:48 +0200
+
+
+Started GET "/assets/articles-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-01-29 10:15:48 +0200
+
+
+Started GET "/assets/welcome-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-01-29 10:15:48 +0200
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-01-29 10:15:48 +0200
+
+
+Started GET "/assets/application-5266d2988799ecc8fe6e81eaab412e7d.css?body=1" for 127.0.0.1 at 2015-01-29 10:15:48 +0200
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-01-29 10:15:48 +0200
+
+
+Started GET "/assets/turbolinks-686d2bf7d9d383528c901c64187a8c31.js?body=1" for 127.0.0.1 at 2015-01-29 10:15:48 +0200
+
+
+Started GET "/assets/application-fd30b062dffa1f37a416cebd713ed694.js?body=1" for 127.0.0.1 at 2015-01-29 10:15:48 +0200
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2015-01-29 10:18:41 +0200
+Processing by ArticlesController#new as HTML
+  Rendered articles/new.html.erb within layouts/application (988.1ms)
+Completed 200 OK in 1072ms (Views: 1071.2ms | ActiveRecord: 0.0ms)
