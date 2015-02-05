@@ -4237,3 +4237,364 @@ Completed 200 OK in 516ms (Views: 407.4ms | ActiveRecord: 16.0ms)
             FROM sqlite_temp_master
             WHERE name='index_tags_on_name' AND type='index'
 [0m
+  [1m[36m (158.7ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (215.9ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateArticles (20150125222323)
+  [1m[35m (97.2ms)[0m  CREATE TABLE `articles` (`id` int(11) auto_increment PRIMARY KEY, `title` varchar(255), `text` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (24.9ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150125222323')
+  [1m[36m (38.7ms)[0m  [1mCOMMIT[0m
+Migrating to ActsAsTaggableOnMigration (20150127225543)
+  [1m[35m (99.2ms)[0m  CREATE TABLE `tags` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255)) ENGINE=InnoDB
+  [1m[36m (99.7ms)[0m  [1mCREATE TABLE `taggings` (`id` int(11) auto_increment PRIMARY KEY, `tag_id` int(11), `taggable_id` int(11), `taggable_type` varchar(255), `tagger_id` int(11), `tagger_type` varchar(255), `context` varchar(128), `created_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (488.8ms)[0m  CREATE  INDEX `index_taggings_on_tag_id`  ON `taggings` (`tag_id`) 
+  [1m[36m (210.7ms)[0m  [1mCREATE  INDEX `index_taggings_on_taggable_id_and_taggable_type_and_context`  ON `taggings` (`taggable_id`, `taggable_type`, `context`) [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150127225543')[0m
+  [1m[35m (54.5ms)[0m  COMMIT
+Migrating to AddMissingUniqueIndices (20150127225544)
+  [1m[36m (177.1ms)[0m  [1mCREATE UNIQUE INDEX `index_tags_on_name`  ON `tags` (`name`) [0m
+  [1m[35m (155.5ms)[0m  DROP INDEX `index_taggings_on_tag_id` ON `taggings`
+  [1m[36m (544.1ms)[0m  [1mDROP INDEX `index_taggings_on_taggable_id_and_taggable_type_and_context` ON `taggings`[0m
+  [1m[35m (188.6ms)[0m  CREATE UNIQUE INDEX `taggings_idx`  ON `taggings` (`tag_id`, `taggable_id`, `taggable_type`, `context`, `tagger_id`, `tagger_type`) 
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150127225544')
+  [1m[36m (54.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddTaggingsCounterCacheToTags (20150127225545)
+  [1m[35m (223.0ms)[0m  ALTER TABLE `tags` ADD `taggings_count` int(11) DEFAULT 0
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1mSELECT  `tags`.* FROM `tags`  ORDER BY `tags`.`id` ASC LIMIT 1000[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150127225545')[0m
+  [1m[35m (58.0ms)[0m  COMMIT
+Migrating to AddMissingTaggableIndex (20150127225546)
+  [1m[36m (233.0ms)[0m  [1mCREATE  INDEX `index_taggings_on_taggable_id_and_taggable_type_and_context`  ON `taggings` (`taggable_id`, `taggable_type`, `context`) [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150127225546')[0m
+  [1m[35m (154.5ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (24.1ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'db/development.mysql2'
+  AND fk.table_name = 'articles'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `articles`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'db/development.mysql2'
+  AND fk.table_name = 'taggings'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `taggings`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'db/development.mysql2'
+  AND fk.table_name = 'tags'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `tags`[0m
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:40:00 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles`
+  Rendered articles/index.html.erb within layouts/application (22.9ms)
+Completed 200 OK in 571ms (Views: 508.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:40:04 +0200
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT `articles`.* FROM `articles`[0m
+  Rendered articles/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 43ms (Views: 41.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2015-02-05 15:40:07 +0200
+Processing by ArticlesController#new as HTML
+  Rendered articles/new.html.erb within layouts/application (284.0ms)
+Completed 200 OK in 364ms (Views: 357.3ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2015-02-05 15:40:25 +0200
+Processing by ArticlesController#new as HTML
+  Rendered articles/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 70ms (Views: 69.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2015-02-05 15:42:08 +0200
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"EfJ4WsuEQOMQ7KGGCWTubEKRCsrl6ExbuBdPE07nXfjpnRDzJq12bhY9rOgU0xPKz+rzts+ANeuAYKzAg3FA2w==", "article"=>{"title"=>"TheFirstArticle", "text"=>"Hello everybody! I test migrating to mysql", "tag_list"=>"mysql"}, "commit"=>"Save Article"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `articles` (`title`, `text`, `created_at`, `updated_at`) VALUES ('TheFirstArticle', 'Hello everybody! I test migrating to mysql', '2015-02-05 13:42:08.821688', '2015-02-05 13:42:08.821688')[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.4ms)[0m  SELECT `tags`.* FROM `tags` WHERE (LOWER(name) = LOWER('mysql'))
+  [1m[36mActsAsTaggableOn::Tag Exists (31.0ms)[0m  [1mSELECT  1 AS one FROM `tags` WHERE `tags`.`name` = BINARY 'mysql' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO `tags` (`name`) VALUES ('mysql')
+  [1m[36mActsAsTaggableOn::Tag Load (13.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  [1m[35mActsAsTaggableOn::Tagging Exists (0.3ms)[0m  SELECT  1 AS one FROM `taggings` WHERE (`taggings`.`tag_id` = BINARY 1 AND `taggings`.`taggable_type` = 'Article' AND `taggings`.`taggable_id` = 1 AND `taggings`.`context` = 'tags' AND `taggings`.`tagger_id` IS NULL AND `taggings`.`tagger_type` IS NULL) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO `taggings` (`tag_id`, `context`, `taggable_id`, `taggable_type`, `created_at`) VALUES (1, 'tags', 1, 'Article', '2015-02-05 13:42:09.132084')[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT  `tags`.* FROM `tags` WHERE `tags`.`id` = 1 LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE `tags` SET `taggings_count` = COALESCE(`taggings_count`, 0) + 1 WHERE `tags`.`id` = 1[0m
+  [1m[35m (72.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 410ms (ActiveRecord: 119.1ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2015-02-05 15:42:09 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT  `articles`.* FROM `articles` WHERE `articles`.`id` = 1 LIMIT 1[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.4ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  Rendered articles/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 72ms (Views: 69.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:42:13 +0200
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT `articles`.* FROM `articles`[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.4ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  Rendered articles/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 39ms (Views: 38.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tags/mysql" for 127.0.0.1 at 2015-02-05 15:42:15 +0200
+Processing by ArticlesController#index as HTML
+  Parameters: {"tag"=>"mysql"}
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` WHERE (LOWER(name) = LOWER('mysql'))[0m
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles` JOIN taggings articles_taggings_f460c88  ON articles_taggings_f460c88.taggable_id = articles.id AND articles_taggings_f460c88.taggable_type = 'Article' AND articles_taggings_f460c88.tag_id = 1
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 43ms (Views: 40.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2015-02-05 15:42:19 +0200
+Processing by ArticlesController#new as HTML
+  Rendered articles/new.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 78ms (Views: 77.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2015-02-05 15:42:53 +0200
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AlEEuKU87XiKpaOfs243xj398AckFxUWQAV0o2j8u7L6PmwRSBXb9Yx0rvGu2cpgsIYJew5/bKZ4cpdwpWqmkQ==", "article"=>{"title"=>"Updates", "text"=>"It seems that mysql is working now", "tag_list"=>"mysql"}, "commit"=>"Save Article"}
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `articles` (`title`, `text`, `created_at`, `updated_at`) VALUES ('Updates', 'It seems that mysql is working now', '2015-02-05 13:42:53.876048', '2015-02-05 13:42:53.876048')[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.4ms)[0m  SELECT `tags`.* FROM `tags` WHERE (LOWER(name) = LOWER('mysql'))
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  [1m[35mActsAsTaggableOn::Tagging Exists (0.3ms)[0m  SELECT  1 AS one FROM `taggings` WHERE (`taggings`.`tag_id` = BINARY 1 AND `taggings`.`taggable_type` = 'Article' AND `taggings`.`taggable_id` = 2 AND `taggings`.`context` = 'tags' AND `taggings`.`tagger_id` IS NULL AND `taggings`.`tagger_type` IS NULL) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `taggings` (`tag_id`, `context`, `taggable_id`, `taggable_type`, `created_at`) VALUES (1, 'tags', 2, 'Article', '2015-02-05 13:42:53.884594')[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.2ms)[0m  SELECT  `tags`.* FROM `tags` WHERE `tags`.`id` = 1 LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE `tags` SET `taggings_count` = COALESCE(`taggings_count`, 0) + 1 WHERE `tags`.`id` = 1[0m
+  [1m[35m (102.8ms)[0m  COMMIT
+Redirected to http://localhost:3000/articles/2
+Completed 302 Found in 120ms (ActiveRecord: 105.2ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2015-02-05 15:42:54 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  `articles`.* FROM `articles` WHERE `articles`.`id` = 2 LIMIT 1[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  Rendered articles/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 55ms (Views: 53.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/2/edit" for 127.0.0.1 at 2015-02-05 15:42:56 +0200
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT  `articles`.* FROM `articles` WHERE `articles`.`id` = 2 LIMIT 1[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  Rendered articles/edit.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 56ms (Views: 54.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:42:58 +0200
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.6ms)[0m  [1mSELECT `articles`.* FROM `articles`[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.4ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.4ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 48ms (Views: 45.8ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/tags/mysql" for 127.0.0.1 at 2015-02-05 15:43:00 +0200
+Processing by ArticlesController#index as HTML
+  Parameters: {"tag"=>"mysql"}
+  [1m[35mActsAsTaggableOn::Tag Load (0.4ms)[0m  SELECT `tags`.* FROM `tags` WHERE (LOWER(name) = LOWER('mysql'))
+  [1m[36mArticle Load (0.5ms)[0m  [1mSELECT `articles`.* FROM `articles` JOIN taggings articles_taggings_f460c88  ON articles_taggings_f460c88.taggable_id = articles.id AND articles_taggings_f460c88.taggable_type = 'Article' AND articles_taggings_f460c88.tag_id = 1[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.5ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.6ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 74ms (Views: 70.4ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2015-02-05 15:43:03 +0200
+Processing by ArticlesController#new as HTML
+  Rendered articles/new.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 49ms (Views: 48.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2015-02-05 15:43:19 +0200
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Zv0/OSTnnPOf0g1m3pXw0GeROlP1ympsvUSCZo9nE+KekleQyc6qfpkDAAjDIg126urDL9+iE9yFM2G1QvEOwQ==", "article"=>{"title"=>"Just a test", "text"=>"Test again", "tag_list"=>""}, "commit"=>"Save Article"}
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `articles` (`title`, `text`, `created_at`, `updated_at`) VALUES ('Just a test', 'Test again', '2015-02-05 13:43:19.942001', '2015-02-05 13:43:19.942001')[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 3 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36m (97.8ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/articles/3
+Completed 302 Found in 104ms (ActiveRecord: 98.5ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2015-02-05 15:43:20 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mArticle Load (0.3ms)[0m  SELECT  `articles`.* FROM `articles` WHERE `articles`.`id` = 3 LIMIT 1
+  [1m[36mActsAsTaggableOn::Tag Load (0.4ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 3 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 46ms (Views: 44.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:43:21 +0200
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT `articles`.* FROM `articles`
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 3 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 44ms (Views: 42.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/tags/mysql" for 127.0.0.1 at 2015-02-05 15:43:22 +0200
+Processing by ArticlesController#index as HTML
+  Parameters: {"tag"=>"mysql"}
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` WHERE (LOWER(name) = LOWER('mysql'))
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT `articles`.* FROM `articles` JOIN taggings articles_taggings_f460c88  ON articles_taggings_f460c88.taggable_id = articles.id AND articles_taggings_f460c88.taggable_type = 'Article' AND articles_taggings_f460c88.tag_id = 1[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.2ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 72ms (Views: 69.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/tags/mysql" for 127.0.0.1 at 2015-02-05 15:45:34 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by ArticlesController#index as HTML
+  Parameters: {"tag"=>"mysql"}
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` WHERE (LOWER(name) = LOWER('mysql'))
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT `articles`.* FROM `articles` JOIN taggings articles_taggings_f460c88  ON articles_taggings_f460c88.taggable_id = articles.id AND articles_taggings_f460c88.taggable_type = 'Article' AND articles_taggings_f460c88.tag_id = 1[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (33.2ms)
+Completed 200 OK in 306ms (Views: 133.7ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/assets/articles-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-02-05 15:45:35 +0200
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-02-05 15:45:35 +0200
+
+
+Started GET "/assets/turbolinks-686d2bf7d9d383528c901c64187a8c31.js?body=1" for 127.0.0.1 at 2015-02-05 15:45:35 +0200
+
+
+Started GET "/assets/welcome-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-02-05 15:45:35 +0200
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-02-05 15:45:35 +0200
+
+
+Started GET "/assets/application-5266d2988799ecc8fe6e81eaab412e7d.css?body=1" for 127.0.0.1 at 2015-02-05 15:45:35 +0200
+
+
+Started GET "/assets/articles-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-02-05 15:45:35 +0200
+
+
+Started GET "/assets/welcome-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-02-05 15:45:35 +0200
+
+
+Started GET "/assets/application-fd30b062dffa1f37a416cebd713ed694.js?body=1" for 127.0.0.1 at 2015-02-05 15:45:35 +0200
+
+
+Started GET "/tags/mysql" for 127.0.0.1 at 2015-02-05 15:45:37 +0200
+Processing by ArticlesController#index as HTML
+  Parameters: {"tag"=>"mysql"}
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` WHERE (LOWER(name) = LOWER('mysql'))
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT `articles`.* FROM `articles` JOIN taggings articles_taggings_f460c88  ON articles_taggings_f460c88.taggable_id = articles.id AND articles_taggings_f460c88.taggable_type = 'Article' AND articles_taggings_f460c88.tag_id = 1[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.4ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 58ms (Views: 55.2ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2015-02-05 15:45:41 +0200
+Processing by ArticlesController#new as HTML
+  Rendered articles/new.html.erb within layouts/application (12.9ms)
+Completed 200 OK in 50ms (Views: 49.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:45:43 +0200
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT `articles`.* FROM `articles`
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 3 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 86ms (Views: 84.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:45:44 +0200
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles`
+  [1m[36mActsAsTaggableOn::Tag Load (0.5ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.4ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 3 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 55ms (Views: 53.1ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:45:45 +0200
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles`
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 3 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 49ms (Views: 47.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:45:46 +0200
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles`
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 3 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 56ms (Views: 54.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:45:46 +0200
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles`
+  [1m[36mActsAsTaggableOn::Tag Load (0.4ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.3ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 3 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 50ms (Views: 48.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-05 15:45:46 +0200
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.6ms)[0m  SELECT `articles`.* FROM `articles`
+  [1m[36mActsAsTaggableOn::Tag Load (0.5ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 1 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.4ms)[0m  SELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 2 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1mSELECT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.`id` = `taggings`.`tag_id` WHERE `taggings`.`taggable_id` = 3 AND `taggings`.`taggable_type` = 'Article' AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m
+  Rendered articles/index.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 54ms (Views: 50.6ms | ActiveRecord: 1.7ms)
