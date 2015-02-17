@@ -12,6 +12,23 @@
   <strong>Tag list:</strong>
   <%= @article.tag_list %>
 </p>
+<h2>Comments</h2>
+<%= render @article.comments %>
 
-<%= link_to 'Back', articles_path %> |
-<%= link_to 'Edit', edit_article_path(@article) %>
+<h2>Add a comment:</h2>
+<%= form_for([@article, @article.comments.build]) do |f| %>
+    <p>
+      <%= f.label :commenter %><br>
+      <%= f.text_field :commenter %>
+    </p>
+    <p>
+      <%= f.label :body %><br>
+      <%= f.text_area :body %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+<% end %>
+
+<%= link_to 'Edit Article', edit_article_path(@article) %> |
+<%= link_to 'Back to Articles', articles_path %>
